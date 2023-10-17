@@ -43,6 +43,7 @@ int main(int argc, char **argv)
 		line = NULL;
 		reads = getline(&line, &len, file);
 		line_num++;
+		ALL.line = line;
 
 		if (reads > 0)
 			cmd_handler(line, &stack, line_num, file);
@@ -74,19 +75,13 @@ int cmd_handler(char *line, stack_t **stack, unsigned int line_num, FILE *file)
 {
 	instruction_t op_table[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
-		{"swap", swap}, {"add", add}, {"nop", nop},
-		{NULL, NULL}};
+		 {"swap", swap}, {"add", add}, {"nop", nop}, {NULL, NULL}};
 	char *opcode = NULL;
-	char *comment = NULL;
 	int i = 0;
 
 	opcode = strtok(line, " \n\t");
-	comment = strchr(opcode, '#');
 
-	if (comment)
-		*comment = '\0';
-
-	if (opcode && opcode[0] == '\0')
+	if (opcode && opcode[0] == '#')
 		return (0);
 
 	ALL.arg = strtok(NULL, " \n\t");
