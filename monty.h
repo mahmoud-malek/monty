@@ -78,5 +78,9 @@ void mysub(stack_t **stack, unsigned int line_number);
 void mymod(stack_t **stack, unsigned int line_number);
 void mymul(stack_t **stack, unsigned int line_number);
 void mydiv(stack_t **stack, unsigned int line_number);
+void mypchar(stack_t **stack, unsigned int line_number);
+void mypstr(stack_t **stack, unsigned int line_number);
+void myrotl(stack_t **stack, unsigned int line_number);
+void myrotr(stack_t **stack, unsigned int line_number);
 
 #endif /*MONTY HEADER  FILE*/

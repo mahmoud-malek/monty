@@ -63,3 +63,93 @@ void mymul(stack_t **stack, unsigned int line_number)
 	*stack = tmp->next;
 	free(tmp);
 }
+
+/**
+ * mypchar - Prints the char at the top of the stack.
+ * @stack: A double pointer to the beginning of the stack.
+ * @line_number: The line number where the instruction was found.
+ *
+ * The char to be printed is the ASCII equivalent of
+ *  the integer at the top of the stack.
+ * If the stack is empty, or if the integer at the top of the
+ *  stack does not represent a valid ASCII value,
+ * the function will print an error message to stderr and exit with
+ * a status of EXIT_FAILURE.
+ */
+
+void mypchar(stack_t **stack, unsigned int line_number)
+{
+	int n;
+
+	if (!*stack)
+	{
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
+		free(ALL.line);
+		fclose(ALL.file);
+		free_list(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	n = (*stack)->n;
+	if (n < 0 || n > 255)
+	{
+		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
+		free(ALL.line);
+		fclose(ALL.file);
+		free_list(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	putchar(n);
+	putchar('\n');
+}
+
+/**
+ * mypstr - Prints the string starting at the top of the stack.
+ * @stack: A double pointer to the beginning of the stack.
+ * @line_number: The line number where the instruction was found.
+ *
+ * The function stops printing when either the stack is over,
+ * the value of the element is 0,
+ * or the value of the element does not represent a char.
+ */
+void mypstr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp = *stack;
+	(void)line_number;
+
+	while (tmp && tmp->n > 0 && tmp->n <= 127)
+	{
+		putchar(tmp->n);
+		tmp = tmp->next;
+	}
+	putchar('\n');
+}
+
+/**
+ * myrotl - Rotates the stack to the top.
+ * @stack: A double pointer to the beginning of the stack.
+ * @line_number: The line number where the instruction was found.
+ *
+ * The top element of the stack becomes the last one,
+ * and the second top element becomes the first one.
+ */
+void myrotl(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp = *stack;
+	stack_t *last_node;
+	(void)line_number;
+
+	if (*stack && (*stack)->next)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		last_node = tmp;
+
+		last_node->next = *stack;
+		(*stack)->prev = last_node;
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+		last_node->next->next = NULL;
+	}
+}
