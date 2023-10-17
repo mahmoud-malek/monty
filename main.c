@@ -73,19 +73,20 @@ int main(int argc, char **argv)
 int cmd_handler(char *line, stack_t **stack, unsigned int line_num, FILE *file)
 {
 	instruction_t op_table[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"add", add},
-		{"nop", nop},
+		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
+		{"swap", swap}, {"add", add}, {"nop", nop},
 		{NULL, NULL}};
 	char *opcode = NULL;
+	char *comment = NULL;
 	int i = 0;
 
 	opcode = strtok(line, " \n\t");
-	if (opcode && opcode[0] == '#')
+	comment = strchr(opcode, '#');
+
+	if (comment)
+		*comment = '\0';
+
+	if (opcode && opcode[0] == '\0')
 		return (0);
 
 	ALL.arg = strtok(NULL, " \n\t");
