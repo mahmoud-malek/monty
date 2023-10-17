@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * pop - Removes the top element of the stack.
+ * mypop - Removes the top element of the stack.
  * @stack: A double pointer to the beginning of the stack.
  * @line_number: The line number where the instruction was found.
  *
@@ -9,7 +9,7 @@
  * and exit with a status of EXIT_FAILURE.
  */
 
-void pop(stack_t **stack, unsigned int line_number)
+void mypop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
 
@@ -28,7 +28,7 @@ void pop(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * swap - Swaps the top two elements of the stack.
+ * myswap - Swaps the top two elements of the stack.
  * @stack: A double pointer to the beginning of the stack.
  * @line_number: The line number where the instruction was found.
  *
@@ -36,7 +36,7 @@ void pop(stack_t **stack, unsigned int line_number)
  * error message to stderr and exit with a status of EXIT_FAILURE.
  */
 
-void swap(stack_t **stack, unsigned int line_number)
+void myswap(stack_t **stack, unsigned int line_number)
 {
 	int tmp;
 
@@ -55,7 +55,7 @@ void swap(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * add - Adds the top two elements of the stack.
+ * myadd - Adds the top two elements of the stack.
  * @stack: A double pointer to the beginning of the stack.
  * @line_number: The line number where the instruction was found.
  *
@@ -65,7 +65,7 @@ void swap(stack_t **stack, unsigned int line_number)
  * EXIT_FAILURE.
  */
 
-void add(stack_t **stack, unsigned int line_number)
+void myadd(stack_t **stack, unsigned int line_number)
 {
 	int sum;
 
@@ -79,12 +79,12 @@ void add(stack_t **stack, unsigned int line_number)
 	}
 
 	sum = (*stack)->n + (*stack)->next->n;
-	pop(stack, line_number);
+	mypop(stack, line_number);
 	(*stack)->n = sum;
 }
 
 /**
- * nop - Does nothing.
+ * mynop - Does nothing.
  * @stack: A double pointer to the beginning of the stack.
  * @line_number: The line number where the instruction was found.
  *
@@ -92,7 +92,7 @@ void add(stack_t **stack, unsigned int line_number)
  * line_number.
  */
 
-void nop(stack_t **stack, unsigned int line_number)
+void mynop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;

@@ -66,13 +66,17 @@ void delete_node_end(stack_t **head);
 void free_list(stack_t *head);
 int cmd_handler(char *line, stack_t **stack, unsigned int line_num,
 				FILE *file);
-void push(stack_t **stack, unsigned int line_number);
+void mypush(stack_t **stack, unsigned int line_number);
 int _isdigit(char *str);
-void pall(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
+void mypall(stack_t **stack, unsigned int line_number);
+void mypint(stack_t **stack, unsigned int line_number);
+void mypop(stack_t **stack, unsigned int line_number);
+void myswap(stack_t **stack, unsigned int line_number);
+void myadd(stack_t **stack, unsigned int line_number);
+void mynop(stack_t **stack, unsigned int line_number);
+void mysub(stack_t **stack, unsigned int line_number);
+void mymod(stack_t **stack, unsigned int line_number);
+void mymul(stack_t **stack, unsigned int line_number);
+void mydiv(stack_t **stack, unsigned int line_number);
 
 #endif /*MONTY HEADER  FILE*/

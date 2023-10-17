@@ -74,18 +74,20 @@ int main(int argc, char **argv)
 int cmd_handler(char *line, stack_t **stack, unsigned int line_num, FILE *file)
 {
 	instruction_t op_table[] = {
-		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
-		 {"swap", swap}, {"add", add}, {"nop", nop}, {NULL, NULL}};
+		{"push", mypush}, {"pall", mypall}, {"pint", mypint}, {"pop", mypop},
+		{"swap", myswap}, {"add", myadd}, {"nop", mynop},
+		{"sub", mysub}, {"div", mydiv}, {"mul", mymul}, {"mod", mymod},
+		{NULL, NULL}};
 	char *opcode = NULL;
-	int i = 0;
+	unsigned int i = 0;
 
-	opcode = strtok(line, " \n\t");
+	opcode = strtok(line, " \n\t\a\b");
 
 	if (opcode && opcode[0] == '#')
 		return (0);
 
-	ALL.arg = strtok(NULL, " \n\t");
-	for (; op_table[i].opcode != NULL && opcode; i++)
+	ALL.arg = strtok(NULL, " \n\t\a\b");
+	for (i = 0; op_table[i].opcode && opcode; i++)
 	{
 		if (strcmp(opcode, op_table[i].opcode) == 0)
 		{
