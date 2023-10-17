@@ -79,8 +79,6 @@ void mymul(stack_t **stack, unsigned int line_number)
 
 void mypchar(stack_t **stack, unsigned int line_number)
 {
-	int n;
-
 	if (!*stack)
 	{
 		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
@@ -90,8 +88,7 @@ void mypchar(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	n = (*stack)->n;
-	if (n < 0 || n > 255)
+	if ((*stack)->n < 0 || (*stack)->n > 127)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
 		free(ALL.line);
@@ -100,7 +97,7 @@ void mypchar(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	putchar(n);
+	putchar((*stack)->n);
 	putchar('\n');
 }
 
