@@ -41,7 +41,7 @@ typedef struct instruction_s
  * @arg: The argument for a Monty byte code operation.
  * @line: The line from the Monty byte code file.
  * @file: The Monty byte code file.
- * @queue: A flag to indicate if the stack should be treated as a queue.
+ * @stack: A flag to indicate if the stack should be treated as a queue.
  *
  * This structure is used to hold variables that need to be accessed
  * throughout the execution of the Monty byte code interpreter. This includes
@@ -54,15 +54,13 @@ typedef struct all_s
 	char *arg;
 	char *line;
 	FILE *file;
-	int queue;
+	int stack;
 } all_t;
 
 extern all_t ALL;
 
 stack_t *add_node(stack_t **head, const int n);
 stack_t *add_node_end(stack_t **head, const int n);
-void delete_node_beginning(stack_t **head);
-void delete_node_end(stack_t **head);
 void free_list(stack_t *head);
 int cmd_handler(char *line, stack_t **stack, unsigned int line_num,
 				FILE *file);
@@ -82,5 +80,7 @@ void mypchar(stack_t **stack, unsigned int line_number);
 void mypstr(stack_t **stack, unsigned int line_number);
 void myrotl(stack_t **stack, unsigned int line_number);
 void myrotr(stack_t **stack, unsigned int line_number);
+void mystack(stack_t **stack, unsigned int line_number);
+void myqueue(stack_t **stack, unsigned int line_number);
 
 #endif /*MONTY HEADER  FILE*/

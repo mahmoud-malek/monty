@@ -24,3 +24,35 @@ void myrotr(stack_t **stack, unsigned int line_number)
 		*stack = tmp;
 	}
 }
+
+/**
+ * mystack - Sets the format of the data to a stack (LIFO).
+ * @stack: A double pointer to the beginning of the stack.
+ * @line_number: The line number where the instruction was found.
+ *
+ * Description: This function sets a global flag (ALL.stack) to 1,
+ * indicating that the data structure should behave as a stack.
+ */
+
+void mystack(stack_t **stack, unsigned int line_number)
+{
+	ALL.stack = 1;
+	(void)line_number;
+	(void)stack;
+}
+
+/**
+ * myqueue - Sets the format of the data to a queue (FIFO).
+ * @stack: A double pointer to the beginning of the stack.
+ * @line_number: The line number where the instruction was found.
+ *
+ * Description: This function sets a global flag (ALL.stack) to 0,
+ * indicating that the data structure should behave as a queue.
+ */
+
+void myqueue(stack_t **stack, unsigned int line_number)
+{
+	ALL.stack = 0;
+	(void)line_number;
+	(void)stack;
+}

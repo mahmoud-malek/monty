@@ -13,6 +13,7 @@
 void mypush(stack_t **stack, unsigned int line_number)
 {
 	int num;
+	stack_t *tmp;
 
 	if (_isdigit(ALL.arg))
 	{
@@ -24,7 +25,12 @@ void mypush(stack_t **stack, unsigned int line_number)
 	}
 
 	num = atoi(ALL.arg);
-	if (add_node(stack, num) == NULL)
+	if (ALL.stack)
+		tmp = add_node(stack, num);
+	else
+		tmp = add_node_end(stack, num);
+
+	if (tmp == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free(ALL.line);
@@ -64,6 +70,8 @@ void mypall(stack_t **stack, unsigned int line_number)
 
 void mypint(stack_t **stack, unsigned int line_number)
 {
+	stack_t *tmp = *stack;
+
 	if (!*stack)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
@@ -73,7 +81,13 @@ void mypint(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	printf("%d\n", (*stack)->n);
+	if (!ALL.stack)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+	}
+
+	printf("%d\n", tmp->n);
 }
 
 /**
@@ -98,12 +112,20 @@ void mysub(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
+	if (!ALL.stack)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->prev->n -= tmp->n;
+		tmp->prev->next = NULL;
+	}
 	else
 	{
 		tmp->next->n -= tmp->n;
 		*stack = tmp->next;
-		free(tmp);
 	}
+
+	free(tmp);
 }
 
 /**
@@ -128,17 +150,33 @@ void mydiv(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	if (tmp->n == 0)
+	if (!ALL.stack)
 	{
-		fprintf(stderr, "L%d: division by zero\n", line_number);
-		free(ALL.line);
-		fclose(ALL.file);
-		free_list(*stack);
-		exit(EXIT_FAILURE);
+		while (tmp->next)
+			tmp = tmp->next;
+		if (tmp->n == 0)
+		{
+			fprintf(stderr, "L%d: division by zero\n", line_number);
+			free(ALL.line);
+			fclose(ALL.file);
+			free_list(*stack);
+			exit(EXIT_FAILURE);
+		}
+		tmp->prev->n /= tmp->n;
+		tmp->prev->next = NULL;
 	}
-
-	tmp->next->n /= tmp->n;
-	*stack = tmp->next;
+	else
+	{
+		if (tmp->n == 0)
+		{
+			fprintf(stderr, "L%d: division by zero\n", line_number);
+			free(ALL.line);
+			fclose(ALL.file);
+			free_list(*stack);
+			exit(EXIT_FAILURE);
+		}
+		tmp->next->n /= tmp->n;
+		*stack = tmp->next;
+	}
 	free(tmp);
 }
-

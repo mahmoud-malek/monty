@@ -1,5 +1,5 @@
 #include "monty.h"
-all_t ALL = {NULL, NULL, NULL, 0};
+all_t ALL = {NULL, NULL, NULL, 1};
 
 /**
  * main - Entry point of the interpreter.
@@ -78,7 +78,7 @@ int cmd_handler(char *line, stack_t **stack, unsigned int line_num, FILE *file)
 		{"swap", myswap}, {"add", myadd}, {"nop", mynop},
 		{"sub", mysub}, {"div", mydiv}, {"mul", mymul}, {"mod", mymod},
 		{"pchar", mypchar}, {"pstr", mypstr}, {"rotl", myrotl}, {"rotr", myrotr},
-		{NULL, NULL}};
+		{"stack", mystack}, {"queue", myqueue}, {NULL, NULL}};
 	char *opcode = NULL;
 	unsigned int i = 0;
 

@@ -11,7 +11,7 @@
 
 void mypop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
+	stack_t *tmp = *stack;
 
 	if (!*stack)
 	{
@@ -22,9 +22,10 @@ void mypop(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	tmp = (*stack)->next;
-	free(*stack);
-	*stack = tmp;
+	*stack = (*stack)->next;
+	if (*stack)
+		(*stack)->prev = NULL;
+	free(tmp);
 }
 
 /**

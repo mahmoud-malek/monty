@@ -86,3 +86,35 @@ void free_list(stack_t *head)
 	}
 }
 
+/**
+ * _isdigit - Checks if a string is a number.
+ * @str: The string to check.
+ *
+ * This function checks if a given string is a number. It allows for a negative
+ * sign at the beginning of the string. If the string is NULL,
+ *  or if it contains
+ * any characters that are not digits
+ * (or a negative sign at the beginning), the
+ * function will return 1. Otherwise, it will return 0.
+ *
+ * Return: 0 if the string is a number, 1 otherwise.
+ */
+
+int _isdigit(char *str)
+{
+	int i = 0;
+
+	if (str == NULL)
+		return (1);
+
+	if (str[0] == '-')
+		i = 1;
+
+	for (; str[i]; i++)
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (1);
+	}
+
+	return (0);
+}
