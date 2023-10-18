@@ -17,6 +17,16 @@ This project is a simple interpreter for Monty ByteCodes files. Monty is a scrip
   - `swap`: swaps the top two elements of the stack.
   - `add`: adds the top two elements of the stack.
   - `nop`: does nothing.
+  - `sub`: subtracts the top element of the stack from the second top element.
+  - `div`: divides the second top element of the stack by the top element.
+  - `mul`: multiplies the top two elements of the stack.
+  - `mod`: computes the rest of the division of the second top element by the top element.
+  - `pchar`: prints the char at the top of the stack.
+  - `pstr`: prints the string starting at the top of the stack.
+  - `rotl`: rotates the stack to the top.
+  - `rotr`: rotates the stack to the bottom.
+  - `stack`: sets the format of the data to a stack (LIFO).
+  - `queue`: sets the format of the data to a queue (FIFO).
 
 ## 🚀 Usage
 
@@ -35,6 +45,17 @@ The interpreter is capable of handling errors. It prints error messages to `stde
 - If the command `push` is not followed by an integer.
 - If the command `pint` or `pop` is called when the stack is empty.
 
+
+## 🧪 Tests
+
+This project includes a set of test files located in the `bytecodes` directory. To run these tests, follow these steps:
+
+1. Navigate to the project directory: `cd path-to-your-project`
+2. Run the interpreter on a test file: `./monty bytecodes/name-of-test-file.m`
+
+Replace `name-of-test-file.m` with the name of the test file you want to run. For example, to run the `00.m` test, you would use the command `./monty bytecodes/00.m`.
+
+
 ## 🤝 Contributing
 
 This project is a demonstration of a Monty language interpreter, and is not open for contribution.
@@ -45,4 +66,4 @@ This project is licensed under the MIT License.
 
 ## 🎉 Acknowledgments
 
-- Holberton School for providing the project.
+- Thanks ALX - Holberton School for providing the project.
